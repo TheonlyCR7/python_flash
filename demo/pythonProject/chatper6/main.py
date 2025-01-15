@@ -29,13 +29,27 @@ def index4():
 @app.route('/index5')
 def index5():
     session['username'] = 'LMC'
+    # article = {
+    #     'title': 'Flask',
+    #     'count': 10,
+    #     'content': '<strong>Flask is a micro web framework written in Python.</strong>'
+    # }
+    # return render_template('index4.html', article=article)
+    return render_template('index4.html')
+
+@app.template_filter('add')
+def add(input):
+    return input + 1
+
+@app.context_processor
+def my_context_processor():
     article = {
         'title': 'Flask',
         'count': 10,
         'content': '<strong>Flask is a micro web framework written in Python.</strong>'
     }
-    return render_template('index4.html', article=article)
-
+    # 返回一个包含article的字典，使其在所有模板中可用
+    return dict(article=article)
 
 if __name__ == "__main__":
     app.run()
