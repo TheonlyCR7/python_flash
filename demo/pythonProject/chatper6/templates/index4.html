@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jinja2</title>
+</head>
+<body>
+
+    {# 这是jinja2模板引擎中注释的写法 #}
+    <div>{{session.get('username')}}, 欢迎你登录木木手记</div>
+    <div>文章的标题是: {{article.title}}</div>
+    <div>文章的阅读量是：{{article.count}}</div>
+
+    {# 这是jinja2中的if判断 #}
+    {% if article.count > 1000 %}
+        <div>文章很受欢迎</div>
+    {% else %}
+        <div>文章还不够火爆</div>
+    {% endif %}   {# 记得结束endif #}
+    {# 这是jinja2中的for循环 #}
+
+    {% for tag in article %}
+        <div>{{tag}}</div>
+    {% endfor %}
+
+    <div>{{article.content | safe}}</div>
+</body>
+</html>
