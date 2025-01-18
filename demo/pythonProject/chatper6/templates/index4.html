@@ -24,6 +24,9 @@
     {% endfor %}
 
     <div>{{article.content | safe}}</div>
-    <div>{{article.count | add}}</div>
+<!--    <div>{{article.count | add}}</div>-->
+    <div>{{add_fun(article.count)}}</div>
+    <div>{{my_add(article.count)}}</div>
+    {# <div>{{add5(article.count, article.count)}}</div> #}
 </body>
 </html>
