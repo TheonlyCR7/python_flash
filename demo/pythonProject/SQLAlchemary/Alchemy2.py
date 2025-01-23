@@ -2,7 +2,7 @@ import hashlib
 import json
 
 from flask import Flask, request
-from sqlalchemy import create_engine, Table
+from sqlalchemy import create_engine, Table, or_
 from sqlalchemy.orm import sessionmaker, scoped_session, declarative_base
 
 app = Flask(__name__)
@@ -45,6 +45,43 @@ def register():
 
     return "注册成功"
 
+# 数据更新
+# 先查询，再进行删除或是更新
+# row = db_session.query(User).filter_by(user_id=101).first()
+# row.nickname = "data"
+# db_session.commit()
+
+# 删除数据
+# row = db_session.query(User).filter_by(user_id=102).delete()
+# db_session.commit()
+
+# 查询 或
+# result = db_session.query(User).filter(or_(User.user_id==1, User.user_id==2)).all()
+# for r in result:
+#     print(r.username)
+
+# 查询 偏移
+result1 = db_session.query(User).limit(4).all()
+result2 = db_session.query(User).limit(1).offset(2).all()
+print("result2")
+for r in result2:
+    for key, value in r.__dict__.items():
+        print(key, value)
+# print("result1")
+# for r in result1:
+#     print(r.user_id)
+# print("result2")
+# for r in result2:
+#     print(r.user_id)
+
+# 查询排序
+# result = db_session.query(User).order_by(User.user_id.desc()).limit(5)
+#
+# # like
+# result = db_session.query(User).filter(User.username.like("o%")).all()
+#
+# for r in result:
+#     print(r.user_id, r.username)
 
 if __name__ == '__main__':
     app.run()
