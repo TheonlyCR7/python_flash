@@ -15,7 +15,7 @@ function getUrlParams(){
 		final_result['article_type']='recommend';
 		final_result['start_num']=0;
 		final_result['end_num']=10;
-	}else {
+	}else {  // 有参数的时候
 		if(uri.indexOf("?")!=-1){
 			params = uri.substr(1);
 			//  page=2&article_type=recommend
@@ -39,6 +39,7 @@ function getUrlParams(){
 	return final_result;
 }
 
+// 锁 锁定后端数据请求状态，是否允许请求后端
 function toNextPage(params){
 	console.log(params);
 	// 拼接url的过程
@@ -56,6 +57,7 @@ function toNextPage(params){
 		url += params[key]
 		url += "&"
 	}
+	// 加上滚动标识
 	if(!url.includes("scroll")){
 		url += "scroll=1";
 	}
@@ -77,11 +79,11 @@ function windowScroll(){
 		document.querySelector(".load-more").innerHTML="没有更多数据了";
 		return
 	}
-	// 可视区域的高度，就是我们能看见的内容的高度
+	// // 可视区域的高度，就是我们能看见的内容的高度
 	// console.log(document.documentElement.clientHeight);
-	//  滚动条在文档中的高度的位置（滚出可见区域的高度）
+	// // 滚动条在文档中的高度的位置（滚出可见区域的高度）
 	// console.log(document.documentElement.scrollTop);
-	//  所有内容的高度
+	// // 所有内容的高度
 	// console.log(document.body.scrollHeight);
 	var clientHeight =document.documentElement.clientHeight;
 	var scrollTop=document.documentElement.scrollTop;
