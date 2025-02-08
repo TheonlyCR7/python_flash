@@ -14,18 +14,18 @@ def gen_email_code():
 def send_email(email,code):
     email_name = config[env].email_name  # 发送方邮箱
     passwd = config[env].passwd  # 填入发送方邮箱的授权码
-    # 不要，千万不要写我的授权码，你一定要写你自己的授权码！！！
+
 
     # 你要把邮件发给谁
     msg_to = email
 
     # 正文
     content = """
-    慕慕手记注册验证码是:<h1 style='color:red'>{}</h1>
+    问道注册验证码是:<h1 style='color:red'>{}</h1>
     """.format(code)
     msg = MIMEMultipart()
-    msg["Subject"] = "慕慕手记验证码"
-    # msg["From"] = "慕慕手记"
+    msg["Subject"] = "问道验证码"
+    # msg["From"] = "问道"
     msg["From"] = email_name
     msg["To"] = msg_to
     # 发送邮件正文，html格式的

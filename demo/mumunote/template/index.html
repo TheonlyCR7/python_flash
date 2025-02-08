@@ -1,9 +1,17 @@
+<!--// 继承了header的布局-->
 {% extends 'public/header.html' %}
+<!--// 重写了content块-->
 {% block content %}
 <!--      按需引入-->
         {% include 'public/sub-header.html' %}
 			<div class="article-container clearfix">
 				<div class="left-menu fl">
+					<!-- 由index.py render_template导入的 	-->
+<!--					    return render_template("index.html",-->
+<!--                           result=db_result,-->
+<!--                           start_num=start_num,-->
+<!--                           end_num=end_num,-->
+<!--                           label_types=label_types)-->
 					{% for label_name,label_value in label_types.items() %}
 					<div class="{{label_value.selected}}">
 						<a href="?article_type={{label_name}}&page=1">{{label_value.name}}</a>

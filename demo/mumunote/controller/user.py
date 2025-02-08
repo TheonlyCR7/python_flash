@@ -13,14 +13,6 @@ from app.settings import env
 
 user = Blueprint("user",__name__)
 
-# @user.route("/aaa")
-# def get_one():
-#     user = User()
-#     result = user.get_one()
-#     print(result)
-#     print(result.username)
-#     return "ok"
-
 @user.route("/vcode")
 def vcode():
     code,bstring = ImageCode().get_code()
