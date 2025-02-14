@@ -1,5 +1,6 @@
 import hashlib
 import json
+import logging
 import re
 
 from flask import Blueprint, make_response, session, request, url_for
@@ -36,6 +37,8 @@ def email_code():
     try:
         send_email(email,code)
         session['ecode'] = code.lower()
+        # 将验证码写入日志中
+        logging.info("email code is %s" % code)
         return response_message.UserMessage.success("邮件发送成功")
     except Exception as e:
         print(e)

@@ -1,6 +1,6 @@
 # 全局通用配置
 class Config(object):
-    db_url = "mysql+pymysql://admin1:123@192.168.101.66:3306/flask_db"
+    db_url = "mysql+pymysql://admin1:123@192.168.101.71:3306/flask_db"
     # 前端页面显示的条数
     page_count = 10
     # 配置一下文章图片的存储路径
