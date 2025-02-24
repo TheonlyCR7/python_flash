@@ -3,7 +3,7 @@ import json
 import logging
 import re
 
-from flask import Blueprint, make_response, session, request, url_for
+from flask import Blueprint, make_response, session, request, url_for, jsonify
 
 from common import response_message
 from common.email_utils import gen_email_code, send_email
@@ -14,14 +14,23 @@ from app.settings import env
 
 user = Blueprint("user",__name__)
 
+
 @user.route("/vcode")
 def vcode():
-    code,bstring = ImageCode().get_code()
+    code, bstring = ImageCode().get_code()
+
+    # 测试环境下返回 JSON（生产环境保持原逻辑）
+    if env == "test":
+        response = make_response(bstring)
+        response.headers["Content-Type"] = "image/jpeg"
+        session['vcode'] = code.lower()
+        print(session['vcode'])
+        return jsonify({"vcode": code.lower()})
+
+    # 生产环境返回图片
     response = make_response(bstring)
-    response.headers["Content-Type"]="image/jpeg"
-    # 存储起来，我们暂时存储到内存中，也就是session里边
+    response.headers["Content-Type"] = "image/jpeg"
     session['vcode'] = code.lower()
-    print(code.lower())
     return response
 
 @user.route("/ecode",methods=["post"])
